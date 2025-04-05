@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+}
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.video {
+  flex: 10;
+  background-color: gray;
+}
+.history {
+  flex: 2;
+  min-width: 100px;
+  min-height: 100px;
+  background-color: lightgray;
+}
+
+@media (max-width: 800px) {
+  .container {
+    flex-direction: column;
+  }
+}
