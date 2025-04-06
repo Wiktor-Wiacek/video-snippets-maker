@@ -1,0 +1,9 @@
+<video class="live-preview" autoplay [srcObject]="state.liveStream"></video>
+<div class="controls">
+  <button (click)="startRecording()" [disabled]="state.isRecording">
+    Start Recording
+  </button>
+  <button (click)="stopRecording()" [disabled]="!state.isRecording">
+    Stop Recording
+  </button>
+</div>
