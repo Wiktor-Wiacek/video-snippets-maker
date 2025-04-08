@@ -1,5 +1,5 @@
 @for (video of history(); track video.id) {
-<img [src]="getImageUrl(video)" [alt]="video.title" />
+<img class="history-item" [src]="getImageUrl(video)" [alt]="video.title" />
 } @empty {
 <p>There are no items.</p>
 }

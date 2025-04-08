@@ -1,36 +1,52 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Signal } from '@angular/core';
 import { VideoRecorderService } from '../../services/video-recorder.service';
+import { Store } from '@ngxs/store';
+import { VideoPreviewSelectors } from '../../state/video-preview/video-preview.selectors';
+import {
+  SetResolution,
+  StartRecording,
+  StopRecording,
+} from '../../state/video-preview/video-preview.actions';
 
 @Component({
   selector: 'app-video-recorder',
-  imports: [],
   templateUrl: './video-recorder.component.html',
   styleUrl: './video-recorder.component.scss',
 })
 export class VideoRecorderComponent implements OnInit {
-  readonly #recorder = inject(VideoRecorderService);
+  private store = inject(Store);
+  private recorder = inject(VideoRecorderService);
+
+  availableResolutions = this.store.selectSnapshot(
+    VideoPreviewSelectors.getAvailableResolutions
+  );
+  selectedResolution = this.store.selectSignal(
+    VideoPreviewSelectors.getSelectedResolution
+  );
 
   state: {
-    isRecording: boolean;
+    isRecording: Signal<boolean>;
     liveStream: MediaStream | null;
   } = {
-    isRecording: false,
+    isRecording: this.store.selectSignal(VideoPreviewSelectors.getIsRecording),
     liveStream: null,
   };
 
   ngOnInit(): void {
-    this.#recorder.startCamera().then((stream) => {
+    this.recorder.startCamera().then((stream) => {
       this.state.liveStream = stream;
     });
   }
 
   startRecording() {
-    this.#recorder.startRecording();
-    this.state.isRecording = true;
+    this.store.dispatch(new StartRecording());
   }
 
   stopRecording() {
-    this.#recorder.stopRecording();
-    this.state.isRecording = false;
+    this.store.dispatch(new StopRecording());
+  }
+
+  setResolution(resolution: string) {
+    this.store.dispatch(new SetResolution(resolution));
   }
 }

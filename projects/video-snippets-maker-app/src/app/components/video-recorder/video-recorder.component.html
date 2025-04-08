@@ -1,9 +1,13 @@
 <video class="live-preview" autoplay [srcObject]="state.liveStream"></video>
 <div class="controls">
-  <button (click)="startRecording()" [disabled]="state.isRecording">
-    Start Recording
-  </button>
-  <button (click)="stopRecording()" [disabled]="!state.isRecording">
-    Stop Recording
-  </button>
+  <button (click)="startRecording()">Start Recording</button>
+  <button (click)="stopRecording()">Stop Recording</button>
 </div>
+<pre>
+  {{ selectedResolution() }}
+</pre>
+
+<button (click)="setResolution('640x360')">320p</button>
+<button (click)="setResolution('1280x720')">720p</button>
+<button (click)="setResolution('1920x1080')">1080p</button>
+<button (click)="setResolution('3840x2160')">4K</button>

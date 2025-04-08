@@ -1,11 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { StorageService } from './storage-service';
+import { Store } from '@ngxs/store';
+import { SaveVideo } from '../state/video-history/video-history.actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VideoRecorderService {
-  readonly #storage = inject(StorageService);
+  private store = inject(Store);
 
   #stream: MediaStream | null = null;
   #config: { duration: number } = { duration: 10000 };
@@ -78,7 +80,12 @@ export class VideoRecorderService {
       // Wait until thumbnail is generated
       const waitForThumbnail = async () => {
         if (thumbnailBlob) {
-          this.#storage.saveVideo(video, thumbnailBlob);
+          this.store.dispatch(
+            new SaveVideo({
+              video,
+              thumbnail: thumbnailBlob,
+            })
+          );
 
           // Clean up
           videoElement.pause();

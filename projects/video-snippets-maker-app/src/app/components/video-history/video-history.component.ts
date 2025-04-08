@@ -1,6 +1,7 @@
-import { Component, inject, OnInit, Signal } from '@angular/core';
-import { StorageService } from '../../services/storage-service';
+import { Component, inject, Signal } from '@angular/core';
 import { VideoSnippet } from '../../models/video-snippet';
+import { Store } from '@ngxs/store';
+import { VideoHistorySelectors } from '../../state/video-history/video-history.selectors';
 
 @Component({
   selector: 'app-video-history',
@@ -9,8 +10,9 @@ import { VideoSnippet } from '../../models/video-snippet';
   styleUrl: './video-history.component.scss',
 })
 export class VideoHistoryComponent {
-  readonly history: Signal<VideoSnippet[]> =
-    inject(StorageService).getHistory();
+  readonly history = inject(Store).selectSignal(
+    VideoHistorySelectors.getVideoHistory
+  );
 
   getImageUrl(video: VideoSnippet): string {
     return video.thumbnail ? URL.createObjectURL(video.thumbnail) : '';
