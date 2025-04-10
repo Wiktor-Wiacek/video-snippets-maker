@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Action, State, StateContext } from '@ngxs/store';
 import { VideoPreviewModel } from './video-preview.model';
 import {
+  InitializeDefaults,
   SetResolution,
   StartRecording,
   StopRecording,
@@ -11,14 +12,27 @@ import { VideoRecorderService } from '../../services/video-recorder.service';
 @State<VideoPreviewModel>({
   name: 'VideoPreview',
   defaults: {
-    availableResolutions: ['640x360', '1280x720', '1920x1080', '3840x2160'],
-    selectedResolution: '1920x1080',
+    availableResolutions: [''],
+    selectedResolution: '',
     isRecording: false,
   },
 })
 @Injectable()
 export class VideoPreviewState {
   private recorder = inject(VideoRecorderService);
+
+  @Action(InitializeDefaults)
+  initializeDefaults(
+    ctx: StateContext<VideoPreviewModel>,
+    action: InitializeDefaults
+  ) {
+    const state = ctx.getState();
+    ctx.setState({
+      ...state,
+      availableResolutions: action.payload.availableResolutions,
+      selectedResolution: action.payload.defaultResolution,
+    });
+  }
 
   @Action(StartRecording)
   startRecording(ctx: StateContext<VideoPreviewModel>) {

@@ -1,4 +1,10 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  APP_INITIALIZER,
+  ApplicationConfig,
+  inject,
+  provideAppInitializer,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -10,11 +16,19 @@ import {
   LOCAL_STORAGE_ENGINE,
 } from '@ngxs/storage-plugin';
 import { RUNTIME_STORAGE_ENGINE } from './storage/runtime-storage.engine';
+import { MediaStreamProviderService } from './services/media-stream-provider.service';
+import { MediaStreamProvider } from './services/abstracts/media-stream.provider';
+import { ConfigService } from './services/config.service';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideHttpClient(),
+    provideAppInitializer(() => {
+      return inject(ConfigService).loadConfig();
+    }),
     provideStore(
       [VideoPreviewState, VideoHistoryState],
       withNgxsStoragePlugin({
@@ -30,5 +44,9 @@ export const appConfig: ApplicationConfig = {
         ],
       })
     ),
+    {
+      provide: MediaStreamProvider,
+      useClass: MediaStreamProviderService,
+    },
   ],
 };

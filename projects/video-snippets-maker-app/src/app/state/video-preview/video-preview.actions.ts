@@ -1,3 +1,8 @@
+export class InitializeDefaults {
+  static readonly type = '[VideoPreview] Initialize Defaults';
+  constructor(public payload: any) {}
+}
+
 export class SetResolution {
   static readonly type = '[VideoPreview] Set Resolution';
   constructor(public payload: string) {}

@@ -1,0 +1,4 @@
+{
+  "availableResolutions": ["1080p", "720p", "480p", "360p"],
+  "defaultResolution": "360p"
+}

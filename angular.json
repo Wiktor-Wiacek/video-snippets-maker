@@ -29,6 +29,11 @@
               {
                 "glob": "**/*",
                 "input": "projects/video-snippets-maker-app/public"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/video-snippets-maker-app/assets",
+                "output": "/assets/"
               }
             ],
             "styles": [
