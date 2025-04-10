@@ -1,25 +1,23 @@
 import { inject, Injectable } from '@angular/core';
-import { StorageService } from './storage-service';
 import { Store } from '@ngxs/store';
 import { SaveVideo } from '../state/video-history/video-history.actions';
+import { MediaStreamProvider } from './abstracts/media-stream.provider';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VideoRecorderService {
   private store = inject(Store);
+  private mediaStreamProvider = inject(MediaStreamProvider);
 
   #stream: MediaStream | null = null;
   #config: { duration: number } = { duration: 10000 };
   #mediaRecorder: MediaRecorder | null = null;
 
   async startCamera() {
-    this.#stream = await navigator.mediaDevices.getUserMedia({
-      video: true,
-      // audio: true,
-    });
+    this.#stream = await this.mediaStreamProvider.getStream();
 
-    return Promise.resolve(this.#stream);
+    return this.#stream;
   }
 
   stopCamera() {
