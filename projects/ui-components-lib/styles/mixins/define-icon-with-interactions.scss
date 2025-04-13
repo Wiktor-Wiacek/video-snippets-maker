@@ -1,0 +1,19 @@
+@mixin define-icon-with-interactions(
+  $icon-name,
+  $icon-height: 60px,
+  $icon-width: 60px
+) {
+  &.#{$icon-name} {
+    background-image: url("../../assets/icons/#{$icon-name}.svg");
+    height: $icon-height;
+    width: $icon-width;
+
+    &:hover {
+      transition: background-image 350ms ease-in-out;
+      background-image: url("../../assets/icons/#{$icon-name}-hover.svg");
+    }
+    &:active {
+      background-image: url("../../assets/icons/#{$icon-name}-active.svg");
+    }
+  }
+}

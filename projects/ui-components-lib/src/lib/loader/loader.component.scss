@@ -1,0 +1,21 @@
+.movie-timer-container {
+  position: relative;
+  width: 144px;
+  height: 24px;
+}
+
+.movie-timer {
+  position: absolute;
+  bottom: 40px;
+  left: 45px;
+}
+
+.time-display {
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 12px;
+}

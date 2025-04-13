@@ -1,0 +1,35 @@
+<div class="ui-preview-container">
+  <div class="ui-preview-header">
+    <h1>UI Preview</h1>
+  </div>
+  <div class="ui-preview-content">
+    <h1>Buttons</h1>
+
+    <div>
+      <ui-lib-button [type]="'play'"></ui-lib-button>
+      <ui-lib-button [type]="'pause'"></ui-lib-button>
+      <ui-lib-button [type]="'start-record'"></ui-lib-button>
+      <ui-lib-button [type]="'stop-record'"></ui-lib-button>
+      <ui-lib-button [type]="'settings'"></ui-lib-button>
+      <ui-lib-button [type]="'x-mark'"></ui-lib-button>
+    </div>
+
+    <h1>Spinner</h1>
+    <ui-lib-spinner></ui-lib-spinner>
+
+    <h1>Loader</h1>
+    <ui-lib-loader
+      [currentTime]="loader.currentTime()"
+      [movieLength]="loader.movieLength()"
+    ></ui-lib-loader>
+
+    <h1>Recorder</h1>
+    <ui-lib-recorder
+      [currentTime]="loader.currentTime()"
+      [movieLength]="loader.movieLength()"
+    ></ui-lib-recorder>
+
+    <h1>Settings</h1>
+    <ui-lib-settings></ui-lib-settings>
+  </div>
+</div>

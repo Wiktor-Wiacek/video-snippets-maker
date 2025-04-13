@@ -1,0 +1,37 @@
+@import "./mixins/define-icon-with-interactions";
+$button-background-color: red;
+$button-content-color: red;
+$button-content-stroke-color: red;
+
+:root {
+  --button-background-color: #{$button-background-color};
+  --button-content-color: #{$button-content-color};
+  --button-content-stroke-color: #{$button-content-stroke-color};
+}
+
+.icon {
+  display: inline-block;
+  cursor: pointer;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  @include define-icon-with-interactions("play");
+  @include define-icon-with-interactions("pause");
+  @include define-icon-with-interactions("start-record");
+  @include define-icon-with-interactions("stop-record");
+  @include define-icon-with-interactions("settings", 80px, 80px);
+  @include define-icon-with-interactions("x-mark", 44px, 44px);
+
+  &.spinner {
+    height: 112px;
+    width: 112px;
+    background-image: url("../assets/icons/spinner.svg");
+  }
+
+  &.recorder-background {
+    height: 80px;
+    width: 320px;
+    background-image: url("../assets/icons/recorder-background.svg");
+  }
+}

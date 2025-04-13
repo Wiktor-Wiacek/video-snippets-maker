@@ -7,9 +7,12 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "types": []
+    "types": [],
+    "paths": {
+      "ui-components-lib": ["./src/public-api"]
+      // "ui-components-lib-assets/*": ["./assets/*"],
+      // "ui-components-lib-styles/*": ["./styles/*"]
+    }
   },
-  "exclude": [
-    "**/*.spec.ts"
-  ]
+  "exclude": ["**/*.spec.ts"]
 }

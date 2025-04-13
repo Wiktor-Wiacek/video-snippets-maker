@@ -1,0 +1,29 @@
+<ng-container
+  *ngTemplateOutlet="
+    isRecording ? stopRecordingTemplate : startRecordingTmplate
+  "
+>
+</ng-container>
+
+<ng-template #startRecordingTmplate>
+  <div class="icon recorder-background">
+    <ui-lib-button
+      [type]="'start-record'"
+      (click)="startRecording()"
+    ></ui-lib-button>
+  </div>
+</ng-template>
+<ng-template #stopRecordingTemplate>
+  <div class="icon recorder-background">
+    <ui-lib-button
+      class="stop-recording-button"
+      [type]="'stop-record'"
+      (click)="stopRecording()"
+    ></ui-lib-button>
+    <ui-lib-loader
+      class="loader"
+      [currentTime]="currentTime()"
+      [movieLength]="movieLength()"
+    ></ui-lib-loader>
+  </div>
+</ng-template>

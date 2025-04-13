@@ -1,0 +1,40 @@
+.settings-content-container {
+  padding: 12px 0px 12px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 4px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: #00000099;
+  width: 280px;
+}
+
+.settings-item {
+  padding: 10px 20px 10px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  height: 48px;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.settings-item-content {
+  color: #ffffff99;
+  font-size: 20px;
+  letter-spacing: 0%;
+  text-decoration: none;
+  text-align: left;
+  text-wrap: wrap;
+  width: fit-content;
+  &-selected {
+    color: #ffffff;
+  }
+}

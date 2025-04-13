@@ -20,11 +20,12 @@
             "outputPath": "dist/video-snippets-maker-app",
             "index": "projects/video-snippets-maker-app/src/index.html",
             "browser": "projects/video-snippets-maker-app/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/video-snippets-maker-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": ["node_modules/ui-components-lib/styles"]
+            },
             "assets": [
               {
                 "glob": "**/*",
@@ -34,10 +35,31 @@
                 "glob": "**/*",
                 "input": "projects/video-snippets-maker-app/assets",
                 "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/ui-components-lib/assets",
+                "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/ui-components-lib/styles/",
+                "output": "/styles/"
+              },
+              {
+                "glob": "**/*",
+                "input": "dist/ui-components-lib/assets",
+                "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "dist/ui-components-lib/styles/",
+                "output": "/styles/"
               }
             ],
             "styles": [
-              "projects/video-snippets-maker-app/src/styles.scss"
+              "projects/video-snippets-maker-app/src/styles.scss",
+              "projects/ui-components-lib/styles/styles.scss"
             ],
             "scripts": []
           },
@@ -83,10 +105,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/video-snippets-maker-app/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -95,9 +114,7 @@
                 "input": "projects/video-snippets-maker-app/public"
               }
             ],
-            "styles": [
-              "projects/video-snippets-maker-app/src/styles.scss"
-            ],
+            "styles": ["projects/video-snippets-maker-app/src/styles.scss"],
             "scripts": []
           }
         }
@@ -107,7 +124,12 @@
       "projectType": "library",
       "root": "projects/ui-components-lib",
       "sourceRoot": "projects/ui-components-lib/src",
-      "prefix": "lib",
+      "prefix": "ui-lib",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -128,10 +150,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/ui-components-lib/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         }
       }

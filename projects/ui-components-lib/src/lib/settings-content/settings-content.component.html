@@ -1,0 +1,14 @@
+<div class="settings-content-container">
+  @for (setting of settings(); track setting.value) {
+  <div class="settings-item" (click)="selectSetting(setting)">
+    <span
+      class="settings-item-content"
+      [class]="{
+        'settings-item-content-selected': setting.isSelected,
+
+        }"
+      >{{ setting.description }}</span
+    >
+  </div>
+  }
+</div>
