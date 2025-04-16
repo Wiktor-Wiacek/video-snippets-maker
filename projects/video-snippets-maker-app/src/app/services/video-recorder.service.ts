@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { SaveVideo } from '../state/video-history/video-history.actions';
-import { MediaStreamProvider } from './abstracts/media-stream.provider';
+import { MediaStreamProvider } from '../abstracts/media-stream.provider';
 
 @Injectable({
   providedIn: 'root',

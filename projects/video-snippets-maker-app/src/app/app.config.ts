@@ -1,5 +1,4 @@
 import {
-  APP_INITIALIZER,
   ApplicationConfig,
   inject,
   provideAppInitializer,
@@ -17,9 +16,13 @@ import {
 } from '@ngxs/storage-plugin';
 import { RUNTIME_STORAGE_ENGINE } from './storage/runtime-storage.engine';
 import { MediaStreamProviderService } from './services/media-stream-provider.service';
-import { MediaStreamProvider } from './services/abstracts/media-stream.provider';
+import { MediaStreamProvider } from './abstracts/media-stream.provider';
 import { ConfigService } from './services/config.service';
 import { provideHttpClient } from '@angular/common/http';
+import { BandwidthProvider } from './abstracts/bandwidth.provider';
+import { BandwidthNativeService } from './services/bandwidth-native.service';
+import { BandwidthCustomService } from './services/bandwidth-custom.service';
+import { NAVIGATOR } from './abstracts/navigator.token';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -47,6 +50,19 @@ export const appConfig: ApplicationConfig = {
     {
       provide: MediaStreamProvider,
       useClass: MediaStreamProviderService,
+    },
+    {
+      provide: BandwidthProvider,
+      useFactory: () => {
+        const navigator = inject(NAVIGATOR) as Navigator & {
+          connection?: { downlink: number };
+        };
+        if (navigator?.connection?.downlink) {
+          return inject(BandwidthNativeService);
+        } else {
+          return inject(BandwidthCustomService);
+        }
+      },
     },
   ],
 };

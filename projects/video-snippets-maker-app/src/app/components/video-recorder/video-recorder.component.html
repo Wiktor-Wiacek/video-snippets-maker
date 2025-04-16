@@ -4,10 +4,15 @@
   <button (click)="stopRecording()">Stop Recording</button>
 </div>
 <pre>
+  <p>Resolution</p>
   {{ selectedResolution() }}
+  <p>Bandwidth</p>
+  {{ state.bandwidth() }}
 </pre>
 
 <button (click)="setResolution('640x360')">320p</button>
 <button (click)="setResolution('1280x720')">720p</button>
 <button (click)="setResolution('1920x1080')">1080p</button>
 <button (click)="setResolution('3840x2160')">4K</button>
+
+<button (click)="getBandwidth()">Bandwidth</button>

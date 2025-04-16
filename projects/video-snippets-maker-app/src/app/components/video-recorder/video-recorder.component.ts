@@ -1,4 +1,11 @@
-import { Component, inject, OnInit, Signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  signal,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import { VideoRecorderService } from '../../services/video-recorder.service';
 import { Store } from '@ngxs/store';
 import { VideoPreviewSelectors } from '../../state/video-preview/video-preview.selectors';
@@ -7,6 +14,7 @@ import {
   StartRecording,
   StopRecording,
 } from '../../state/video-preview/video-preview.actions';
+import { BandwidthProvider } from '../../abstracts/bandwidth.provider';
 
 @Component({
   selector: 'app-video-recorder',
@@ -16,6 +24,7 @@ import {
 export class VideoRecorderComponent implements OnInit {
   private store = inject(Store);
   private recorder = inject(VideoRecorderService);
+  private bandwidth = inject(BandwidthProvider);
 
   availableResolutions = this.store.selectSnapshot(
     VideoPreviewSelectors.getAvailableResolutions
@@ -27,9 +36,11 @@ export class VideoRecorderComponent implements OnInit {
   state: {
     isRecording: Signal<boolean>;
     liveStream: MediaStream | null;
+    bandwidth: WritableSignal<number>;
   } = {
     isRecording: this.store.selectSignal(VideoPreviewSelectors.getIsRecording),
     liveStream: null,
+    bandwidth: signal(0),
   };
 
   ngOnInit(): void {
@@ -48,5 +59,11 @@ export class VideoRecorderComponent implements OnInit {
 
   setResolution(resolution: string) {
     this.store.dispatch(new SetResolution(resolution));
+  }
+
+  getBandwidth() {
+    this.bandwidth.getBandwidth().then((bandwidth) => {
+      this.state.bandwidth.set(bandwidth);
+    });
   }
 }

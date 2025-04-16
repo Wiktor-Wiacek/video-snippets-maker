@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MediaStreamProvider } from './abstracts/media-stream.provider';
+import { MediaStreamProvider } from '../abstracts/media-stream.provider';
 
 @Injectable({
   providedIn: 'root',
