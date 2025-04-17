@@ -1,14 +1,4 @@
 @import "./mixins/define-icon-with-interactions";
-$button-background-color: red;
-$button-content-color: red;
-$button-content-stroke-color: red;
-
-:root {
-  --button-background-color: #{$button-background-color};
-  --button-content-color: #{$button-content-color};
-  --button-content-stroke-color: #{$button-content-stroke-color};
-}
-
 .icon {
   display: inline-block;
   cursor: pointer;

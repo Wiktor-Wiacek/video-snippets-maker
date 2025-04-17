@@ -1,5 +1,6 @@
 export interface VideoPreviewModel {
   availableResolutions: string[];
   selectedResolution: string;
-  isRecording: boolean;
+  autoResolution: string;
+  inPreviewMode: boolean;
 }

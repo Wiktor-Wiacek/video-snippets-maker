@@ -14,7 +14,8 @@ import { VideoRecorderService } from '../../services/video-recorder.service';
   defaults: {
     availableResolutions: [''],
     selectedResolution: '',
-    isRecording: false,
+    autoResolution: '',
+    inPreviewMode: false,
   },
 })
 @Injectable()
@@ -39,7 +40,7 @@ export class VideoPreviewState {
     const state = ctx.getState();
     ctx.setState({
       ...state,
-      isRecording: true,
+      inPreviewMode: true,
     });
     this.recorder.startRecording();
   }
@@ -49,7 +50,7 @@ export class VideoPreviewState {
     const state = ctx.getState();
     ctx.setState({
       ...state,
-      isRecording: false,
+      inPreviewMode: false,
     });
 
     this.recorder.stopRecording();

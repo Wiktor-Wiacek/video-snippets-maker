@@ -1,0 +1,10 @@
+.control-panel-container {
+  position: absolute;
+  bottom: 3rem;
+  width: 100%;
+  padding: 0 3rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

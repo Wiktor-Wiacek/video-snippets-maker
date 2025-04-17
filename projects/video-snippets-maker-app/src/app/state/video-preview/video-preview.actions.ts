@@ -8,6 +8,11 @@ export class SetResolution {
   constructor(public payload: string) {}
 }
 
+export class SetAutoResolution {
+  static readonly type = '[VideoPreview] Set Auto Resolution';
+  constructor(public payload: string) {}
+}
+
 export class StartRecording {
   static readonly type = '[VideoPreview] Start Recording';
 }

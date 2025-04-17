@@ -10,3 +10,5 @@ export * from './lib/spinner/spinner.component';
 export * from './lib/recorder/recorder.component';
 export * from './lib/loader/loader.component';
 export * from './lib/settings/settings.component';
+
+export * from './lib/models/setting';

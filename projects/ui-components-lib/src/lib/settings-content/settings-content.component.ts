@@ -1,25 +1,5 @@
-import { Component, input } from '@angular/core';
-
-interface Setting {
-  value: string;
-  description: string;
-  isSelected?: boolean;
-}
-
-const defaultSettings: Setting[] = [
-  {
-    value: '360p ',
-    description: '360p (Low Quality)',
-  },
-  {
-    value: '720p ',
-    description: '720p (Medium Quality)',
-  },
-  {
-    value: '1080p ',
-    description: '1080p (High Quality)',
-  },
-];
+import { Component, input, output } from '@angular/core';
+import { Setting } from '../models/setting';
 
 @Component({
   selector: 'ui-lib-settings-content',
@@ -27,7 +7,7 @@ const defaultSettings: Setting[] = [
   styleUrl: './settings-content.component.scss',
 })
 export class SettingsContentComponent {
-  settings = input(defaultSettings, {
+  settings = input([], {
     transform: (value: Setting[]) => {
       return value.map((setting) => ({
         ...setting,
@@ -35,6 +15,8 @@ export class SettingsContentComponent {
       }));
     },
   });
+
+  optionSelected = output<Setting | undefined>();
 
   selected: Setting | undefined;
 
@@ -44,5 +26,6 @@ export class SettingsContentComponent {
     });
 
     setting.isSelected = !setting.isSelected;
+    this.optionSelected.emit(setting);
   }
 }

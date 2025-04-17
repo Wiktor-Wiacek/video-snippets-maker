@@ -30,7 +30,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideAppInitializer(() => {
-      return inject(ConfigService).loadConfig();
+      return Promise.all([
+        inject(ConfigService).loadConfig(),
+        inject(BandwidthProvider).getBandwidth(),
+      ]).then(([_, bandwidth]) => {
+        console.log('Bandwidth:', bandwidth);
+      });
     }),
     provideStore(
       [VideoPreviewState, VideoHistoryState],

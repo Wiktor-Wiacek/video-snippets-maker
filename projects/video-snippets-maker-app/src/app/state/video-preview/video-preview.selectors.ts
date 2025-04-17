@@ -11,8 +11,14 @@ export class VideoPreviewSelectors {
   static getSelectedResolution(state: VideoPreviewModel): string {
     return state.selectedResolution;
   }
+
+  @Selector([VideoPreviewState])
+  static getAutoResolution(state: VideoPreviewModel): string {
+    return state.autoResolution;
+  }
+
   @Selector([VideoPreviewState])
   static getIsRecording(state: VideoPreviewModel): boolean {
-    return state.isRecording;
+    return state.inPreviewMode;
   }
 }
