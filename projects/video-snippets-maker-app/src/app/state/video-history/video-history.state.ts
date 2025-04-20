@@ -21,6 +21,7 @@ export class VideoHistoryState {
         id: Math.random().toString(36).substring(2, 15),
         video,
         thumbnail,
+        thumbnailObjectURL: URL.createObjectURL(thumbnail),
         createdAt: new Date(),
       },
     ];

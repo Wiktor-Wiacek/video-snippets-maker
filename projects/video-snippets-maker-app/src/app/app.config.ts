@@ -23,6 +23,7 @@ import { BandwidthProvider } from './abstracts/bandwidth.provider';
 import { BandwidthNativeService } from './services/bandwidth-native.service';
 import { BandwidthCustomService } from './services/bandwidth-custom.service';
 import { NAVIGATOR } from './abstracts/navigator.token';
+import { ControlPanelState } from './state/control-panel/control-panel.state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -38,7 +39,7 @@ export const appConfig: ApplicationConfig = {
       });
     }),
     provideStore(
-      [VideoPreviewState, VideoHistoryState],
+      [VideoPreviewState, VideoHistoryState, ControlPanelState],
       withNgxsStoragePlugin({
         keys: [
           {

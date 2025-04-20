@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, model, output } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { LoaderComponent } from '../loader/loader.component';
 import { CommonModule } from '@angular/common';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './recorder.component.scss',
 })
 export class RecorderComponent {
-  currentTime = input<number>(0);
+  currentTime = model<number>(0);
   movieLength = input<number>(0);
 
   recordStart = output<void>();
@@ -26,5 +26,10 @@ export class RecorderComponent {
   stopRecording() {
     this.isRecording = false;
     this.recoredStop.emit();
+  }
+
+  clearState() {
+    this.isRecording = false;
+    this.currentTime.set(0);
   }
 }

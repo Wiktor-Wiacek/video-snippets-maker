@@ -1,10 +1,49 @@
 {
   "availableResolutions": ["1080p", "720p", "480p", "360p"],
   "defaultResolution": "360p",
-
+  "videoMaxDuration": 10,
   "connectionTest": {
     "testFileUrl": "assets/1mb-examplefile.txt",
     "fileSize": 1000000,
     "sampleCount": 1
-  }
+  },
+
+  "qualitySettings": [
+    {
+      "label": "360p (Low Quality)",
+      "quality": "low",
+      "resolution": "360p",
+      "width": 640,
+      "height": 360,
+      "frameRate": 24,
+      "bandwidth": {
+        "min": 0,
+        "max": 2
+      }
+    },
+    {
+      "label": "720p (Medium Quality)",
+      "quality": "medium",
+      "resolution": "720p",
+      "bandwidth": {
+        "min": 2,
+        "max": 5
+      },
+      "width": 1280,
+      "height": 720,
+      "frameRate": 30
+    },
+    {
+      "label": "1080p (High Quality)",
+      "quality": "high",
+      "resolution": "1080p",
+      "width": 1920,
+      "height": 1080,
+      "frameRate": 30,
+      "bandwidth": {
+        "min": 5,
+        "max": 1000000
+      }
+    }
+  ]
 }

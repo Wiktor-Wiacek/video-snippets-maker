@@ -1,3 +1,3 @@
 export abstract class MediaStreamProvider {
-  abstract getStream(): Promise<MediaStream>;
+  abstract getStream(resolution?: string | undefined): Promise<MediaStream>;
 }

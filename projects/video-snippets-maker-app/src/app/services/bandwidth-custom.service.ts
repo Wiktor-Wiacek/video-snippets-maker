@@ -24,7 +24,7 @@ export class BandwidthCustomService extends BandwidthProvider {
 
   constructor() {
     super();
-    const settings = this.configService.setting;
+    const settings = this.configService.config;
     if (settings) {
       this.testFileUrl = settings.connectionTest.testFileUrl;
       this.fileSize = settings.connectionTest.fileSize;

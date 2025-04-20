@@ -6,6 +6,7 @@ interface Snippet {
   filePath: string;
   thumbnail: Blob;
   thumbnailPath: string;
+  thumbnailObjectURL: string;
   duration: number;
   createdAt: Date;
 }

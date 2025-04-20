@@ -1,13 +1,10 @@
 <div class="control-panel-container">
   <ui-lib-settings (optionSelected)="setResolution($event)"></ui-lib-settings>
   <ui-lib-recorder
-    [currentTime]="timer"
-    [movieLength]="10"
+    [(currentTime)]="timer"
+    [movieLength]="maxDuration"
     (recordStart)="startRecording()"
     (recoredStop)="stopRecording()"
   ></ui-lib-recorder>
-  <div>
-    <p>Resolution</p>
-    {{ selectedResolution() }}
-  </div>
+  <div></div>
 </div>

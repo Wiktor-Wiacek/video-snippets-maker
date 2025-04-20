@@ -12,15 +12,15 @@ import { Setting } from '../models/setting';
 
 const defaultSettings: Setting[] = [
   {
-    value: '360p ',
+    value: '360p',
     description: '360p (Low Quality)',
   },
   {
-    value: '720p ',
+    value: '720p',
     description: '720p (Medium Quality)',
   },
   {
-    value: '1080p ',
+    value: '1080p',
     description: '1080p (High Quality)',
   },
 ];

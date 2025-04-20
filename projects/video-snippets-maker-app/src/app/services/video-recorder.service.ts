@@ -14,8 +14,8 @@ export class VideoRecorderService {
   #config: { duration: number } = { duration: 10000 };
   #mediaRecorder: MediaRecorder | null = null;
 
-  async startCamera() {
-    this.#stream = await this.mediaStreamProvider.getStream();
+  async startCamera(resolution?: string | undefined): Promise<MediaStream> {
+    this.#stream = await this.mediaStreamProvider.getStream(resolution);
 
     return this.#stream;
   }
@@ -23,6 +23,7 @@ export class VideoRecorderService {
   stopCamera() {
     if (this.#stream) {
       this.#stream.getTracks().forEach((track) => track.stop());
+      this.#stream = null;
     }
   }
 
