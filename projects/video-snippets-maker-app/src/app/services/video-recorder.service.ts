@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { SaveVideo } from '../state/video-history/video-history.actions';
 import { MediaStreamProvider } from '../abstracts/media-stream.provider';
+import { getRandomUUID } from '../utils/uuid';
 
 @Injectable({
   providedIn: 'root',
@@ -74,15 +75,22 @@ export class VideoRecorderService {
     // Handle recording
     mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
     mediaRecorder.onstop = async () => {
-      const video = new Blob(chunks, { type: 'video/webm' });
+      const videoBlob = new Blob(chunks, { type: 'video/webm' });
 
       // Wait until thumbnail is generated
       const waitForThumbnail = async () => {
         if (thumbnailBlob) {
+          const id = getRandomUUID();
+          const duration = videoElement.duration;
+          const createdAt = new Date();
+
           this.store.dispatch(
             new SaveVideo({
-              video,
+              id,
+              duration,
+              createdAt,
               thumbnail: thumbnailBlob,
+              video: videoBlob,
             })
           );
 

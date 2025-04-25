@@ -1,0 +1,15 @@
+<div class="dialog-overlay" (click)="closeOnBackdropClick && close()">
+  <div class="dialog-container" (click)="$event.stopPropagation()">
+    <div class="dialog-header">
+      <button class="close-button" (click)="close()">&times;</button>
+    </div>
+    <div class="dialog-content">
+      <video
+        class="video-preview"
+        [src]="videoPreview().videoObjectURL"
+        playsinline
+        autoplay
+      ></video>
+    </div>
+  </div>
+</div>

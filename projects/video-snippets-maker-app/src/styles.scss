@@ -18,11 +18,11 @@ body {
   background-color: lightgray;
 }
 
-@media (max-width: 800px) {
-  .container {
-    flex-direction: column;
-  }
-}
+// @media (max-width: 800px) {
+//   .container {
+//     flex-direction: row;
+//   }
+// }
 
 // $button-background-color: #5061d0;
 // $button-content-color: #ffffff;

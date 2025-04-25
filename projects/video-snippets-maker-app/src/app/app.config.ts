@@ -14,7 +14,6 @@ import {
   withNgxsStoragePlugin,
   LOCAL_STORAGE_ENGINE,
 } from '@ngxs/storage-plugin';
-import { RUNTIME_STORAGE_ENGINE } from './storage/runtime-storage.engine';
 import { MediaStreamProviderService } from './services/media-stream-provider.service';
 import { MediaStreamProvider } from './abstracts/media-stream.provider';
 import { ConfigService } from './services/config.service';
@@ -24,6 +23,11 @@ import { BandwidthNativeService } from './services/bandwidth-native.service';
 import { BandwidthCustomService } from './services/bandwidth-custom.service';
 import { NAVIGATOR } from './abstracts/navigator.token';
 import { ControlPanelState } from './state/control-panel/control-panel.state';
+import { VideoHistoryItemPreviewState } from './state/video-history-item-preview/video-history-item-preview.state';
+import { provideIndexedDb } from 'ngx-indexed-db';
+import { DatabaseProvider } from './abstracts/database.provider';
+import { NgxIndexedDBProvider } from './database/ngx-indexed-db.provider';
+import { indexedDbConfig } from './config/indexed-db.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,24 +35,27 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideAppInitializer(() => {
-      return Promise.all([
-        inject(ConfigService).loadConfig(),
-        inject(BandwidthProvider).getBandwidth(),
-      ]).then(([_, bandwidth]) => {
-        console.log('Bandwidth:', bandwidth);
+      const configService = inject(ConfigService);
+      const bandwidth = inject(BandwidthProvider);
+
+      return configService.loadConfig().then(() => {
+        bandwidth.getBandwidth().then((bandwidth) => {
+          console.log('Bandwidth:', bandwidth);
+        });
       });
     }),
     provideStore(
-      [VideoPreviewState, VideoHistoryState, ControlPanelState],
+      [
+        VideoPreviewState,
+        VideoHistoryState,
+        VideoHistoryItemPreviewState,
+        ControlPanelState,
+      ],
       withNgxsStoragePlugin({
         keys: [
           {
-            key: VideoPreviewState,
-            engine: LOCAL_STORAGE_ENGINE,
-          },
-          {
             key: VideoHistoryState,
-            engine: RUNTIME_STORAGE_ENGINE,
+            engine: LOCAL_STORAGE_ENGINE,
           },
         ],
       })
@@ -69,6 +76,11 @@ export const appConfig: ApplicationConfig = {
           return inject(BandwidthCustomService);
         }
       },
+    },
+    provideIndexedDb(indexedDbConfig),
+    {
+      provide: DatabaseProvider,
+      useClass: NgxIndexedDBProvider,
     },
   ],
 };

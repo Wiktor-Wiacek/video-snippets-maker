@@ -1,5 +1,5 @@
-import { VideoSnippet } from '../../models/video-snippet';
+import { VideoHistory } from '../../models/video-history';
 
 export interface VideoHistoryModel {
-  history: VideoSnippet[];
+  history: VideoHistory[];
 }
