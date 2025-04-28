@@ -1,7 +1,11 @@
 import { Action, State, StateContext } from '@ngxs/store';
 import { VideoHistoryModel } from './video-history.model';
 import { inject, Injectable } from '@angular/core';
-import { GetVideoHistory, SaveVideo } from './video-history.actions';
+import {
+  GetVideoHistory,
+  RemoveVideo,
+  SaveVideo,
+} from './video-history.actions';
 import { DatabaseProvider } from '../../abstracts/database.provider';
 
 @State<VideoHistoryModel>({
@@ -70,6 +74,28 @@ export class VideoHistoryState {
       });
     } catch (error) {
       console.error('Error getting video history from database:', error);
+      return;
+    }
+  }
+
+  @Action(RemoveVideo)
+  async removeVideo(ctx: StateContext<VideoHistoryModel>, action: RemoveVideo) {
+    try {
+      await Promise.all([
+        this.db.removeVideoThumbnail(action.payload),
+        this.db.removeVideo(action.payload),
+      ]);
+
+      const state = ctx.getState();
+      const history = state.history.filter(
+        (video) => video.id !== action.payload
+      );
+      ctx.setState({
+        ...state,
+        history,
+      });
+    } catch (error) {
+      console.error('Error removing video from database:', error);
       return;
     }
   }

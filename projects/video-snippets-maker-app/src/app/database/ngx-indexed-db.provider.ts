@@ -54,4 +54,15 @@ export class NgxIndexedDBProvider extends DatabaseProvider {
       this.dbService.getAll(VIDEO_HISTORY_STORE_NAME).pipe(tap(console.log))
     );
   }
+
+  override removeVideo(id: string): Promise<void> {
+    return firstValueFrom(
+      this.dbService.delete(VIDEO_PREVIEW_STORE_NAME, id).pipe(tap(console.log))
+    );
+  }
+  override removeVideoThumbnail(id: string): Promise<void> {
+    return firstValueFrom(
+      this.dbService.delete(VIDEO_HISTORY_STORE_NAME, id).pipe(tap(console.log))
+    );
+  }
 }
