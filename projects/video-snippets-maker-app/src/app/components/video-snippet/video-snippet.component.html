@@ -1,0 +1,31 @@
+<div
+  class="snippet"
+  (mouseenter)="showTrashIcon()"
+  (mouseleave)="hideTrashIcon()"
+>
+  <ui-lib-button
+    class="remove-button"
+    [style.visibility]="trashIconVisible ? 'visible' : 'hidden'"
+    [type]="'trash'"
+    (click)="removeVideo()"
+  >
+    ></ui-lib-button
+  >
+  <img
+    class="thumbnail"
+    [src]="video()?.thumbnailObjectURL"
+    [alt]="video()?.id"
+    (click)="openVideo()"
+  />
+  <div class="details-container">
+    <div class="details">
+      <span>
+        {{ video()?.createdAt | date : "dd.MM.yyyy" }}
+      </span>
+      <span>
+        {{ video()?.createdAt | date : "hh:mm" }}
+      </span>
+      <span> {{ video()?.duration | number : "1.0-0" }}s </span>
+    </div>
+  </div>
+</div>

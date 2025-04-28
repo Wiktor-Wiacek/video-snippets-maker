@@ -6,10 +6,11 @@ import { VideoHistoryItemPreviewComponent } from '../video-history-item-preview/
 import { VideoHistory } from '../../models/video-history';
 import { GetVideoHistory } from '../../state/video-history/video-history.actions';
 import { GetVideoPreview } from '../../state/video-history-item-preview/video-history-item-preview.actions';
+import { VideoSnippetComponent } from '../video-snippet/video-snippet.component';
 
 @Component({
   selector: 'app-video-history',
-  imports: [],
+  imports: [VideoSnippetComponent],
   templateUrl: './video-history.component.html',
   styleUrl: './video-history.component.scss',
 })

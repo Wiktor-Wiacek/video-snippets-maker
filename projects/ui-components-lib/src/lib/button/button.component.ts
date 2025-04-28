@@ -10,7 +10,13 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 })
 export class ButtonComponent {
   type = input<
-    'play' | 'pause' | 'start-record' | 'stop-record' | 'settings' | 'x-mark'
+    | 'play'
+    | 'pause'
+    | 'start-record'
+    | 'stop-record'
+    | 'settings'
+    | 'x-mark'
+    | 'trash'
   >();
   state = input<'' | 'hover' | 'active'>('');
 }

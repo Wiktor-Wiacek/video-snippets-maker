@@ -10,6 +10,7 @@
   @include define-icon-with-interactions("pause");
   @include define-icon-with-interactions("start-record");
   @include define-icon-with-interactions("stop-record");
+  @include define-icon-with-interactions("trash", 28px, 28px);
   @include define-icon-with-interactions("settings", 80px, 80px);
   @include define-icon-with-interactions("x-mark", 44px, 44px);
 

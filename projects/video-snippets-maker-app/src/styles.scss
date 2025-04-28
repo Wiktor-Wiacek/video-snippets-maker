@@ -1,6 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+$background-color-primary: #000000;
+$background-color-secondary: #2c2c2c;
+$padding: 25px;
+$border-radius: 10px;
+$font-color: #ffffff;
+
 body {
   margin: 0;
+  background-color: $background-color-primary;
 }
 .container {
   display: flex;
@@ -8,18 +15,16 @@ body {
 }
 
 .video {
-  flex: 10;
-  background-color: gray;
+  flex: 9;
+  height: 100vh;
 }
+
 .history {
-  flex: 2;
-  min-width: 100px;
-  min-height: 100px;
-  background-color: lightgray;
+  flex: 3;
+  height: 100vh;
 }
 
 // @media (max-width: 800px) {
-//   .container {
 //     flex-direction: row;
 //   }
 // }
@@ -36,4 +41,10 @@ $button-content-stroke-color: red;
   --button-background-color: #{$button-background-color};
   --button-content-color: #{$button-content-color};
   --button-content-stroke-color: #{$button-content-stroke-color};
+
+  --background-color-primary: #{$background-color-primary};
+  --background-color-secondary: #{$background-color-secondary};
+  --padding: #{$padding};
+  --border-radius: #{$border-radius};
+  --font-color: #{$font-color};
 }

@@ -1,3 +1,15 @@
-.history-item {
-  max-width: 100%;
+.history-container {
+  background-color: var(--background-color-secondary);
+  border-radius: var(--border-radius);
+
+  height: 100vh;
+  overflow: auto;
+
+  .history {
+    padding: var(--padding);
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 }
