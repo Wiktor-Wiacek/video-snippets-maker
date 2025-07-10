@@ -1,12 +1,23 @@
 .container {
   padding: var(--padding);
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  min-width: 960px;
 
   .video {
     padding: var(--padding);
     position: relative;
+    flex: 9;
+    height: 100vh;
+    width: 100%;
   }
 
   .history {
+    width: 100%;
+    display: flex;
     padding: var(--padding);
+    flex: 3;
+    height: 100vh;
   }
 }

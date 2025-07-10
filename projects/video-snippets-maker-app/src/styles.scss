@@ -9,25 +9,6 @@ body {
   margin: 0;
   background-color: $background-color-primary;
 }
-.container {
-  display: flex;
-  height: 100vh;
-}
-
-.video {
-  flex: 9;
-  height: 100vh;
-}
-
-.history {
-  flex: 3;
-  height: 100vh;
-}
-
-// @media (max-width: 800px) {
-//     flex-direction: row;
-//   }
-// }
 
 // $button-background-color: #5061d0;
 // $button-content-color: #ffffff;

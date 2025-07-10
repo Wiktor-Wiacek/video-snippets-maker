@@ -1,4 +1,8 @@
 :host {
+  background-color: var(--background-color-secondary);
+  border-radius: var(--border-radius);
+
+  display: block;
   height: 100%;
 }
 .live-preview {
