@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { VideoSnippet } from '../../models/video-snippet';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { ButtonComponent } from 'ui-components-lib';

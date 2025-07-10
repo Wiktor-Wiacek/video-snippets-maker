@@ -21,7 +21,7 @@ import {
   styleUrl: './ui-preview.component.scss',
 })
 export class UiPreviewComponent implements OnInit, OnDestroy {
-  interval: any;
+  interval: ReturnType<typeof setInterval> | null = null;
   loader = {
     currentTime: signal(0),
     movieLength: signal(10),
@@ -32,7 +32,9 @@ export class UiPreviewComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.interval && clearInterval(this.interval);
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
   }
 
   runTimmer() {

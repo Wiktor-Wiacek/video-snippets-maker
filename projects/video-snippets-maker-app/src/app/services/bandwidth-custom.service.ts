@@ -1,13 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { BandwidthProvider } from '../abstracts/bandwidth.provider';
 import { HttpClient } from '@angular/common/http';
-import {
-  BehaviorSubject,
-  firstValueFrom,
-  lastValueFrom,
-  Observable,
-  of,
-} from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, finalize, tap, timeout } from 'rxjs/operators';
 import { ConfigService } from './config.service';
 

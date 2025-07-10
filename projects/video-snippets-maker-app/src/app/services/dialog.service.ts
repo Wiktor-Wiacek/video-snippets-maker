@@ -1,5 +1,6 @@
 import {
   ApplicationRef,
+  ComponentRef,
   createComponent,
   EnvironmentInjector,
   EventEmitter,
@@ -10,7 +11,7 @@ import {
 import { Observable, Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-export interface DialogConfig<T = any> {
+export interface DialogConfig<T = never> {
   data?: T;
 }
 
@@ -21,7 +22,7 @@ export interface ConfirmDialogData {
   cancelText?: string;
 }
 
-export interface DialogRef<T, R = any> {
+export interface DialogRef<T, R = never> {
   afterClosed: Observable<R | undefined>;
   componentInstance: T;
   close: (result?: R) => void;
@@ -37,7 +38,7 @@ export class DialogService {
   /**
    * Open a dialog with the given component
    */
-  open<T extends object, R = any, D = any>(
+  open<T extends object, R = never, D = never>(
     component: Type<T>,
     config?: DialogConfig<D>
   ): DialogRef<T, R> {
@@ -68,7 +69,7 @@ export class DialogService {
       'closed' in componentInstance &&
       componentInstance['closed'] instanceof EventEmitter
     ) {
-      (componentInstance['closed'] as EventEmitter<any>)
+      (componentInstance['closed'] as EventEmitter<R>)
         .pipe(take(1))
         .subscribe((result) => {
           this.removeDialog(componentRef);
@@ -94,7 +95,7 @@ export class DialogService {
   /**
    * Clean up a dialog when closing
    */
-  private removeDialog<T>(componentRef: any): void {
+  private removeDialog<T>(componentRef: ComponentRef<T>): void {
     this.appRef.detachView(componentRef.hostView);
     componentRef.destroy();
   }

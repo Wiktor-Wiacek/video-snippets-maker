@@ -1,5 +1,5 @@
 import { QualitySetting } from '../models/quality.setting';
-import { IndexedDbConfig } from './indexed-db.config';
+// import { IndexedDbConfig } from './indexed-db.config';
 
 export interface Config {
   availableResolutions: string[];

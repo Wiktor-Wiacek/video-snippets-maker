@@ -56,7 +56,7 @@ export class VideoRecorderService {
       const videoUrl = URL.createObjectURL(videoBlob);
       videoElement.src = videoUrl;
       await this.waitForDataToBeLoaded(videoElement);
-      let thumbnailBlob = await this.createThumbnail(videoElement);
+      const thumbnailBlob = await this.createThumbnail(videoElement);
       if (thumbnailBlob) {
         const id = getRandomUUID();
         const duration = videoElement.duration;
@@ -86,8 +86,7 @@ export class VideoRecorderService {
   createThumbnail(videoElement: HTMLVideoElement): Promise<Blob | null> {
     return new Promise((resolve) => {
       videoElement.currentTime = Math.random() * videoElement.duration;
-
-      videoElement.addEventListener('seeked', () => {
+      const seekedHandler = () => {
         if (videoElement.readyState >= 2) {
           const canvas = document.createElement('canvas');
           canvas.width = videoElement.videoWidth;
@@ -99,14 +98,15 @@ export class VideoRecorderService {
             (blob) => {
               if (blob) {
                 resolve(blob);
-                videoElement.removeEventListener('seeked', () => {});
+                videoElement.removeEventListener('seeked', seekedHandler);
               }
             },
             'image/jpeg',
             1
           );
         }
-      });
+      };
+      videoElement.addEventListener('seeked', seekedHandler);
     });
   }
 
@@ -124,8 +124,6 @@ export class VideoRecorderService {
         }
         // Normal behavior
         else resolve(videoElement.duration);
-
-        videoElement.removeEventListener('loadedmetadata', () => {});
       });
       videoElement.onerror = (event) => reject(event);
     });

@@ -24,7 +24,7 @@ export class ControlPanelComponent {
 
   recorder = viewChild(RecorderComponent);
 
-  interval: any;
+  interval: ReturnType<typeof setInterval> | null = null;
   timer = 0;
   maxDuration = this.config.config?.videoMaxDuration ?? 10;
   selectedResolution = this.store.selectSignal(
@@ -51,7 +51,9 @@ export class ControlPanelComponent {
 
   private clearTimer() {
     this.timer = 0;
-    this.interval && clearInterval(this.interval);
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
     this.recorder()?.clearState();
   }
 }

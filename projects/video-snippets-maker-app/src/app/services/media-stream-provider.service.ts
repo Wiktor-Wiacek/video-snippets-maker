@@ -16,11 +16,11 @@ export class MediaStreamProviderService extends MediaStreamProvider {
   };
 
   async getStream(resolution?: string): Promise<MediaStream> {
-    let qualitySetting = resolution
+    const qualitySetting = resolution
       ? this.resolutionAdvisor.getQualityByResolution(resolution)
       : await this.resolutionAdvisor.getBestResolution();
 
-    let constraints = this.getConstraints(qualitySetting);
+    const constraints = this.getConstraints(qualitySetting);
 
     return this.handleMediaStream(qualitySetting!, constraints);
   }

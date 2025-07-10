@@ -5,7 +5,7 @@ import {
   VIDEO_STORE_NAME,
 } from '../constants/db-store';
 
-export interface IndexedDbConfig extends DBConfig {}
+export type IndexedDbConfig = DBConfig;
 export const indexedDbConfig: IndexedDbConfig = {
   name: VIDEO_STORE_NAME,
   version: 1,

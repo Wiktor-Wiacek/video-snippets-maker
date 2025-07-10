@@ -1,12 +1,18 @@
 <div class="settings-content-container">
   @for (setting of settings(); track setting.value) {
-  <div class="settings-item" (click)="selectSetting(setting)">
+  <div
+    class="settings-item"
+    (click)="selectSetting(setting)"
+    (keydown.enter)="selectSetting(setting)"
+    tabindex="0"
+    role="button"
+    [attr.aria-pressed]="setting.isSelected"
+  >
     <span
       class="settings-item-content"
       [class]="{
-        'settings-item-content-selected': setting.isSelected,
-
-        }"
+        'settings-item-content-selected': setting.isSelected
+      }"
       >{{ setting.description }}</span
     >
   </div>

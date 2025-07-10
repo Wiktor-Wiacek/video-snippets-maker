@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
 import { BandwidthProvider } from '../abstracts/bandwidth.provider';
-import { DOCUMENT } from '@angular/common';
 import { NAVIGATOR } from '../abstracts/navigator.token';
 
 @Injectable({

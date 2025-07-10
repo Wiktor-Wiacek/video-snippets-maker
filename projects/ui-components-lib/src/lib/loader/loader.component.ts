@@ -1,4 +1,4 @@
-import { Component, input, SimpleChanges } from '@angular/core';
+import { Component, input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'ui-lib-loader',
@@ -6,13 +6,13 @@ import { Component, input, SimpleChanges } from '@angular/core';
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.scss',
 })
-export class LoaderComponent {
+export class LoaderComponent implements OnChanges {
   currentTime = input<number>(0);
   movieLength = input<number>(0);
 
-  progressWidth: number = 0;
+  progressWidth = 0;
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.calculateProgressWidth();
   }
 

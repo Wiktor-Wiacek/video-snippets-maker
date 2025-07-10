@@ -11,12 +11,12 @@ export const RUNTIME_STORAGE_ENGINE = new InjectionToken<StorageEngine>(
 
 @Injectable()
 export class RuntimeStorageEngine implements StorageEngine {
-  store = new Map<string, any>();
-  getItem(key: string): any {
-    this.store.get(key);
+  store = new Map<string, unknown>();
+  getItem(key: string): unknown {
+    return this.store.get(key);
   }
 
-  setItem(key: string, value: any): void {
+  setItem(key: string, value: unknown): void {
     this.store.set(key, value);
   }
 }

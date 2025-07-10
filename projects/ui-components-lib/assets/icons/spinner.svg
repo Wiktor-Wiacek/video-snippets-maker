@@ -18,7 +18,7 @@
     stroke="url(#spinner-gradient)" 
     stroke-width="8"
     stroke-dasharray="289" 
-    stroke-dashoffset="0">
+    stroke-dashoffset="0">a
     <animateTransform
       attributeName="transform"
       type="rotate"

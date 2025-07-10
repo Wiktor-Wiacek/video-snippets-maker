@@ -5,6 +5,7 @@ import {
   HostListener,
   inject,
   Input,
+  OnDestroy,
   Output,
 } from '@angular/core';
 import { Store } from '@ngxs/store';
@@ -17,7 +18,7 @@ import { VideoPreview } from '../../models/video-preview';
   templateUrl: './video-history-item-preview.component.html',
   styleUrl: './video-history-item-preview.component.scss',
 })
-export class VideoHistoryItemPreviewComponent {
+export class VideoHistoryItemPreviewComponent implements OnDestroy {
   @HostListener('document:keydown.escape')
   onEscape() {
     if (this.closeOnEscape) {
@@ -25,9 +26,9 @@ export class VideoHistoryItemPreviewComponent {
     }
   }
 
-  @Input() closeOnBackdropClick: boolean = true;
-  @Input() closeOnEscape: boolean = true;
-  @Output() closed = new EventEmitter<any>();
+  @Input() closeOnBackdropClick = true;
+  @Input() closeOnEscape = true;
+  @Output() closed = new EventEmitter<void>();
 
   private readonly preview = inject(Store).selectSignal(
     VideoHistoryItemSelectors.getVideoHistoryItemPreview
@@ -47,8 +48,8 @@ export class VideoHistoryItemPreviewComponent {
       : '';
   }
 
-  close(result?: any): void {
-    this.closed.emit(result);
+  close(): void {
+    this.closed.emit();
   }
 
   ngOnDestroy(): void {

@@ -13,6 +13,9 @@
     class="thumbnail"
     [src]="video().thumbnailObjectURL"
     [alt]="video().id"
+    (click)="openVideo()"
+    (keydown.enter)="openVideo()"
+    tabindex="0"
   />
   <div class="details-container">
     <div class="details">

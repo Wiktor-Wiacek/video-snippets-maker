@@ -1,7 +1,19 @@
-<div class="dialog-overlay" (click)="closeOnBackdropClick && close()">
-  <div class="dialog-container" (click)="$event.stopPropagation()">
+<div
+  class="dialog-overlay"
+  tabindex="0"
+  (click)="closeOnBackdropClick && close()"
+  (keydown.escape)="closeOnBackdropClick && close()"
+>
+  <div
+    class="dialog-container"
+    tabindex="0"
+    (click)="$event.stopPropagation()"
+    (keydown)="$event.stopPropagation()"
+  >
     <div class="dialog-header">
-      <button class="close-button" (click)="close()">&times;</button>
+      <button class="close-button" (click)="close()" (keydown.enter)="close()">
+        &times;
+      </button>
     </div>
     <div class="dialog-content">
       <video
